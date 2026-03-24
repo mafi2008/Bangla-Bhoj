@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Dancing+Script:wght@600;700&display=swap');
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Highborn Vintage';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://fonts.cdnfonts.com/s/115715/Higborn-nAg3g.woff') format('woff');
+}
+
+@theme {
+  --color-maroon: #7A1E1E;
+  --color-gold: #D4A017;
+  --color-cream: #FFF7E6;
+  --color-leaf: #3F6B3C;
+  
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-script: "Dancing Script", cursive;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: #1a1a1a;
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6, .font-serif {
+  font-family: var(--font-serif);
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-scroll {
+  animation: scroll 120s linear infinite;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}

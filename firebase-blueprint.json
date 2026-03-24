@@ -1,0 +1,80 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "A traditional food item for sale.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the food item" },
+        "price": { "type": "number", "description": "Price in BDT" },
+        "image": { "type": "string", "description": "URL of the product image" },
+        "description": { "type": "string", "description": "Detailed description" },
+        "flavour": { "type": "array", "items": { "type": "string" }, "description": "Available flavours" },
+        "stock": { "type": "number", "description": "Available stock quantity" },
+        "category": { "type": "string", "description": "Category of the food" },
+        "createdAt": { "type": "timestamp", "description": "When the product was added" }
+      },
+      "required": ["name", "price", "image", "description", "stock", "category", "createdAt"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "A customer's order.",
+      "type": "object",
+      "properties": {
+        "customerName": { "type": "string", "description": "Full name of the customer" },
+        "phone": { "type": "string", "description": "Phone number" },
+        "alternativePhone": { "type": "string", "description": "Alternative phone number" },
+        "division": { "type": "string", "description": "Division" },
+        "district": { "type": "string", "description": "District" },
+        "address": { "type": "string", "description": "Full delivery address" },
+        "orderNotes": { "type": "string", "description": "Special instructions" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "productId": { "type": "string" },
+              "name": { "type": "string" },
+              "price": { "type": "number" },
+              "quantity": { "type": "number" },
+              "flavour": { "type": "string" },
+              "image": { "type": "string" }
+            },
+            "required": ["productId", "name", "price", "quantity"]
+          }
+        },
+        "totalPrice": { "type": "number", "description": "Total order price including delivery" },
+        "deliveryCharge": { "type": "number", "description": "Delivery charge" },
+        "paymentMethod": { "type": "string", "description": "COD, bKash, Nagad, Rocket" },
+        "status": { "type": "string", "description": "pending, confirmed, delivered, cancelled" },
+        "createdAt": { "type": "timestamp", "description": "When the order was placed" }
+      },
+      "required": ["customerName", "phone", "division", "district", "address", "items", "totalPrice", "paymentMethod", "status", "createdAt"]
+    },
+    "User": {
+      "title": "User",
+      "description": "Admin or customer user profile.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "customer"] },
+        "createdAt": { "type": "timestamp" }
+      },
+      "required": ["email", "role", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Collection of traditional food products."
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Collection of customer orders."
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles and roles."
+    }
+  }
+}
